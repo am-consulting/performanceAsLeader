@@ -5,6 +5,9 @@
 #'
 #'@name performanceAsLeader
 #'@docType package
-#'@import quantmod reshape ggplot2 scales dplyr lubridate
+#'@importFrom quantmod  getSymbols
+#'@importFrom lubridate  year month days_in_month %m+%
+#'@importFrom reshape  melt
+#'@import ggplot2 scales dplyr
 #'
 NULL
