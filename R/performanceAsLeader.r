@@ -8,6 +8,7 @@
 #'@importFrom quantmod  getSymbols
 #'@importFrom lubridate  year month days_in_month %m+%
 #'@importFrom reshape  melt
-#'@import ggplot2 scales dplyr
+#'@importFrom scales comma
+#'@import ggplot2 dplyr
 #'
 NULL
