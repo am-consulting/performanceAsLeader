@@ -1,4 +1,4 @@
-#'Get timeseries data from fred rtc.
+#'Get timeseries data from fred etc.
 #'
 #'@param no=1 NIKKEI225 , no=2 DEXJPUS , no=3 JPNASSETS
 #'

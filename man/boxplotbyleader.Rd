@@ -4,7 +4,7 @@
 \alias{boxplotbyleader}
 \title{Making boxplot. you need a dataset made by valueswithleader()}
 \usage{
-boxplotbyleader()
+boxplotbyleader(dataSource = "")
 }
 \arguments{
 \item{No}{parameter}

@@ -7,7 +7,7 @@
 #'@encoding UTF-8
 #'
 #'@export
-ldpvsdpj<-function(){
+ldpvsdpj<-function(dataSource=""){
 tmp<-dataset
 dpj<-subset(tmp,as.Date("2009-09-16")<=tmp[,1] & as.Date("2012-12-25")>=tmp[,1])
 ldp<-subset(tmp,as.Date("2012-12-26")<=tmp[,1])
@@ -19,6 +19,7 @@ FUNdpj<-function(x){x(dpj[,2])}#MINSHUTOU
 FUNldp<-function(x){x(ldp[,2])}#JIMINTOU
 compareData<-data.frame(sapply(tmp,FUNdpj),sapply(tmp,FUNldp),row.names=unlist(functionList))
 colnames(compareData)<-c("Democratic Party of Japan","Liberal Democratic Party of Japan")
+compareData<-format(compareData,scientific=F)
 compareData<<-compareData
 tmp1<-data.frame(dpj,color="red")
 tmp2<-data.frame(ldp,color="blue")
@@ -41,14 +42,18 @@ event<-c(
   )
 eventPosition<-c(max(tmp[,2]),mean(tmp[,2]),min(tmp[,2]),max(tmp[,2]),mean(tmp[,2]),min(tmp[,2]))
 g<-ggplot()
+if(nrow(tmp%>%filter(tmp[,2]<0))==0 | nrow(tmp%>%filter(tmp[,2]>=0))==0){
 g<-g+geom_line(data=tmp,aes(x=tmp[,1],y=tmp[,2]),color=tmp[,5])
+}else{
+g<-g+geom_bar(data=tmp,aes(x=tmp[,1],y=tmp[,2]),stat="identity",position="identity",fill=tmp[,5],width=5,col=tmp[,5],alpha=0.3)
+}
 g<-g+geom_vline(xintercept=as.numeric(as.Date(eventDate)),color="dimgray")
 g<-g+geom_text(aes(x=as.Date(eventDate),y=eventPosition,label=paste(eventDate,event)),vjust=0.5,hjust=1,size=4)
 g<-g+ggtitle(paste(colnames(tmp)[2],"\nRed:MINSHUTOU , BLUE:JIMINTOU\nSource:",dataSource,sep=""))
 g<-g+theme(axis.text.x=element_text(size=15,face="plain",angle=0,hjust=1,vjust=0.5))
 g<-g+theme(axis.text.y=element_text(size=15,face="plain"))
 g<-g+theme(title      =element_text(size=15,face="plain"))
-g<-g+xlab("")+ylab("")+scale_y_continuous(labels=comma)
+g<-g+xlab("")+ylab("")+scale_y_continuous(labels=comma)+scale_x_date(labels=date_format("%Y-%m"))
 print(g)
 timeSeries<<-tmp[,-5]
 }

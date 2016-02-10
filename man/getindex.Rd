@@ -2,7 +2,7 @@
 % Please edit documentation in R/getindex.r
 \name{getindex}
 \alias{getindex}
-\title{Get timeseries data from fred rtc.}
+\title{Get timeseries data from fred etc.}
 \usage{
 getindex(no = 1)
 }
@@ -13,6 +13,6 @@ getindex(no = 1)
 preData you can make your data as preData
 }
 \description{
-Get timeseries data from fred rtc.
+Get timeseries data from fred etc.
 }
 
