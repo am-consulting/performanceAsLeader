@@ -4,7 +4,7 @@
 \alias{boxplotbyleader}
 \title{Making boxplot. you need a dataset made by valueswithleader()}
 \usage{
-boxplotbyleader(dataSource = "")
+boxplotbyleader(dataSource = "", dateform = "\%Y/\%m")
 }
 \arguments{
 \item{No}{parameter}
