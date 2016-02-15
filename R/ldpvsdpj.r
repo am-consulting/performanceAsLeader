@@ -17,16 +17,17 @@ functionList<-list("length","mean","median","max","min","sd","first","last","per
 tmp<-sapply(functionList,get)
 FUNdpj<-function(x){x(dpj[,2])}#MINSHUTOU
 FUNldp<-function(x){x(ldp[,2])}#JIMINTOU
-compareData<-data.frame(sapply(tmp,FUNdpj),sapply(tmp,FUNldp),row.names=unlist(functionList))
+compareData<-data.frame(sapply(tmp,FUNdpj),sapply(tmp,FUNldp),row.names=unlist(functionList),check.names=F)
 colnames(compareData)<-c("Democratic Party of Japan","Liberal Democratic Party of Japan")
 compareData<-format(compareData,scientific=F)
 compareData<<-compareData
-tmp1<-data.frame(dpj,color="red")
-tmp2<-data.frame(ldp,color="blue")
+tmp1<-data.frame(dpj,color=c(rep("red",length.out=nrow(dpj)-1),"blue"),check.names=F)
+tmp2<-data.frame(ldp,color="blue",check.names=F)
 tmp<-rbind(tmp1,tmp2)
 eventDate<-c(
   "2011-3-11",
   "2012-11-14",
+  "2012-12-26",
   "2013-4-4",
   "2014-4-1",
   "2014-10-31",
@@ -35,12 +36,19 @@ eventDate<-c(
 event<-c(
   "Tohoku earthquake\nand tsunami",
   "Question-time debate\nbetween Noda(PM) vs Abe",
+  "Change of government",
   "1st bazooka\nfired by KURODA",
   "Consumption tax\nfrom 5% to 8%",
   "2nd bazooka\nfired by KURODA",
   "BOJ adapts\nnegative interest rates"
   )
-eventPosition<-c(max(tmp[,2]),mean(tmp[,2]),min(tmp[,2]),max(tmp[,2]),mean(tmp[,2]),min(tmp[,2]))
+eventPosition<-c(max(tmp[,2]),mean(tmp[,2]),min(tmp[,2]),max(tmp[,2]),mean(tmp[,2]),min(tmp[,2]),max(tmp[,2]))
+#for ggplot
+tmp<<-tmp
+event<<-event
+eventDate<<-eventDate
+eventPosition<<-eventPosition
+#for ggplot
 g<-ggplot()
 if(nrow(tmp%>%filter(tmp[,2]<0))==0 | nrow(tmp%>%filter(tmp[,2]>=0))==0){
 g<-g+geom_line(data=tmp,aes(x=tmp[,1],y=tmp[,2]),color=tmp[,5])
