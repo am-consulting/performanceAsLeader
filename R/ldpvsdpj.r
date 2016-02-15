@@ -8,6 +8,7 @@
 #'
 #'@export
 ldpvsdpj<-function(dataSource=""){
+if(exists("dataset")==F){valueswithleader()}
 tmp<-dataset
 dpj<-subset(tmp,as.Date("2009-09-16")<=tmp[,1] & as.Date("2012-12-25")>=tmp[,1])
 ldp<-subset(tmp,as.Date("2012-12-26")<=tmp[,1])

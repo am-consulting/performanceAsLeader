@@ -6,6 +6,7 @@
 #'
 #'@export
 boxplotbyleader<-function(dataSource="" , dateform="%Y/%m"){
+  if(exists("dataset")==F){valueswithleader()}
   for(jjj in 1:length(indextitle)){#1:PMJ,2:BOJ
     tmp<-dataset[,c(2,2+jjj)]
     colnames(tmp)[2]<-"Person"
