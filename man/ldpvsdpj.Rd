@@ -5,7 +5,7 @@
 \alias{ldpvsdpj}
 \title{Compare performance between Liberal Democratic Party of Japan and Democratic Party of Japan}
 \usage{
-ldpvsdpj(dataSource = "")
+ldpvsdpj(dataSource = "", position = 1, type = 1)
 }
 \arguments{
 \item{No}{parameter}

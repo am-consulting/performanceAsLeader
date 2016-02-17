@@ -9,6 +9,7 @@
 #'@importFrom lubridate  year month days_in_month %m+%
 #'@importFrom reshape  melt
 #'@importFrom scales comma
+#'@importFrom xtable xtable
 #'@import ggplot2 dplyr
 #'
 NULL

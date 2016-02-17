@@ -1,8 +1,8 @@
 Package: performanceAsLeader
 Type: Package
 Title: Compare Performances By Leaders
-Version: 0.1.8
-Date: 2016-02-15
+Version: 0.1.9
+Date: 2016-02-17
 Author: Asset Management Consulting Corporation
 Maintainer: Asset Management Consulting Corporation <inquiryemail@am-consulting.co.jp>
 Description: This package will compare the performance of each reader.For example, you can compare the stock price, exchange rate, government bond interest rates or your data in the box plot by leaders.(e.g. prime minister, governor of Central bank).Also you can check the basic statistics of them in the list.Source Data - Ministry of Finance Japan, Federal Reserve Bank of St. Louis

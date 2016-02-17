@@ -7,7 +7,7 @@
 #'@encoding UTF-8
 #'
 #'@export
-ldpvsdpj<-function(dataSource=""){
+ldpvsdpj<-function(dataSource="",position=1,type=1){
 if(exists("dataset")==F){valueswithleader()}
 tmp<-dataset
 dpj<-subset(tmp,as.Date("2009-09-16")<=tmp[,1] & as.Date("2012-12-25")>=tmp[,1])
@@ -22,7 +22,11 @@ compareData<-data.frame(sapply(tmp,FUNdpj),sapply(tmp,FUNldp),row.names=unlist(f
 colnames(compareData)<-c("Democratic Party of Japan","Liberal Democratic Party of Japan")
 compareData<-format(compareData,scientific=F)
 compareData<<-compareData
+if(type==1){
+tmp1<-data.frame(dpj,color="red",check.names=F)
+}else{
 tmp1<-data.frame(dpj,color=c(rep("red",length.out=nrow(dpj)-1),"blue"),check.names=F)
+}
 tmp2<-data.frame(ldp,color="blue",check.names=F)
 tmp<-rbind(tmp1,tmp2)
 eventDate<-c(
@@ -43,8 +47,13 @@ event<-c(
   "2nd bazooka\nfired by KURODA",
   "BOJ adapts\nnegative interest rates"
   )
-#eventPosition<-head(rep(c(max(tmp[,2]),mean(tmp[,2]),min(tmp[,2])),ceiling(length(eventDate)/3)),length(eventDate))
+if(position==1){
+eventPosition<-head(rep(c(max(tmp[,2]),mean(tmp[,2]),min(tmp[,2])),ceiling(length(eventDate)/3)),length(eventDate))
+}else if(position==2){
 eventPosition<-head(rep(c(quantile(tmp[,2])[4],quantile(tmp[,2])[3],quantile(tmp[,2])[2]),ceiling(length(eventDate)/3)),length(eventDate))
+}else{
+eventPosition<-head(rep(c(quantile(tmp[,2])[4],median(tmp[,2]),min(tmp[,2])),ceiling(length(eventDate)/3)),length(eventDate))
+}
 #for ggplot
 tmp<<-tmp
 event<<-event
@@ -58,7 +67,7 @@ g<-g+geom_line(data=tmp,aes(x=tmp[,1],y=tmp[,2]),color=tmp[,5])
 g<-g+geom_bar(data=tmp,aes(x=tmp[,1],y=tmp[,2]),stat="identity",position="identity",fill=tmp[,5],width=5,col=tmp[,5],alpha=0.3)
 }
 g<-g+geom_vline(xintercept=as.numeric(as.Date(eventDate)),color="dimgray")
-g<-g+geom_text(aes(x=as.Date(eventDate),y=eventPosition,label=paste(eventDate,"\n",event)),vjust=0,hjust=1,size=3)
+g<-g+geom_text(aes(x=as.Date(eventDate),y=eventPosition,label=paste(eventDate,"\n",event)),vjust=0,hjust=1,size=3.5)
 g<-g+ggtitle(paste(colnames(tmp)[2],"\nRed:MINSHUTOU , BLUE:JIMINTOU\nSource:",dataSource,sep=""))
 g<-g+theme(axis.text.x=element_text(size=15,face="plain",angle=0,hjust=1,vjust=0.5))
 g<-g+theme(axis.text.y=element_text(size=15,face="plain"))
